@@ -36,7 +36,7 @@ main.cpp
 
 ``smst mysmst(img);``    // The PSR-MST is created using Fibonacci Heap data structure
 
-``mysmst.segmentation(0, 3);`` -----> *l* = 200, *m* = 3 ------ If *l* is ``0``, it is computed by ``int( sqrt(M * N) / 2``)
+``mysmst.segmentation(200, 3);`` -----> *l* = 200, *m* = 3 ------ If *l* is ``0``, it is computed by ``int( sqrt(M * N) / 2``)
 
 
 <img src="./images/Fig_5.jpg" height="30%" width="30%">
