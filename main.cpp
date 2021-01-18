@@ -32,7 +32,7 @@ int main(int argc, char *argv[]) {
 	/*---------V--------------V---------*/
 
 	smst mysmst(img);
-	mysmst.segmentation(200, 3);
+	mysmst.segmentation(200, 1);
 
 	/*----------------------------------*/
 	/*----------------------------------*/
