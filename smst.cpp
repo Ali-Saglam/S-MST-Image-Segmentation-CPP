@@ -1,7 +1,7 @@
 /*
 Saglam, Ali, & Baykan, N. A. (2017).
 "Sequential image segmentation based on min- imum spanning tree representation".
-Pattern Recognition Letters, 87 , 155–162.
+Pattern Recognition Letters, 87 , 155â€“162.
 https://doi.org/10.1016/j.patrec.2016.06.001 .
 */
 
@@ -156,7 +156,7 @@ void smst::segmentation(int l, float m) {
 	int start, finish, first, last, maxin1 = -1000, maxin2 = -1000;
 	float max1 = -1000, max2 = -1000;
 
-	vector<Node*> cuts;
+	vector<Connection> cuts;
 
 	segments.clear();
 
@@ -214,17 +214,33 @@ void smst::segmentation(int l, float m) {
 		if (psrmst[i].distance > min(max1, max2) + curr_c) {
 			psrmst[i].node1->removeConnection(psrmst[i].node2);
 			psrmst[i].node2->removeConnection(psrmst[i].node1);
-			cuts.push_back(psrmst[i].node1);
-			cuts.push_back(psrmst[i].node2);
+			Connection conn;
+			conn.node1 = psrmst[i].node1;
+			conn.node2 = psrmst[i].node2;
+			cuts.push_back(conn);
 		}
 	}
 
 	for (int i = 0; i < cuts.size(); i++) {
-		vector<Node::Pixel> segment;
-		cuts[i]->collectPixels(segment, cuts[i]);
-		if (segment.size() > 0)
-			segments.push_back(segment);
+		vector<Node::Pixel> segment1;
+		cuts[i].node1->collectPixels(segment1, cuts[i].node2);
+		if (segment1.size() > 0)
+			segments.push_back(segment1);
+
+		vector<Node::Pixel> segment2;
+		cuts[i].node2->collectPixels(segment2, cuts[i].node1);
+		if (segment2.size() > 0)
+			segments.push_back(segment2);
 	}
+
+	for (int i = 0; i < cuts.size(); i++) {
+		cuts[i].node1->addConnection(cuts[i].node2);
+		cuts[i].node2->addConnection(cuts[i].node1);
+	}
+	cuts.clear();
+	for (int i = 0; i < M; i++)
+		for (int j = 0; j < N; j++)
+			nodes[i][j].mark = false;
 }
 
 Mat smst::getColoredSegments() {
