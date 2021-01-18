@@ -1,7 +1,7 @@
 /*
 Saglam, Ali, & Baykan, N. A. (2017).
 "Sequential image segmentation based on min- imum spanning tree representation".
-Pattern Recognition Letters, 87 , 155–162.
+Pattern Recognition Letters, 87 , 155â€“162.
 https://doi.org/10.1016/j.patrec.2016.06.001 .
 */
 
@@ -46,7 +46,7 @@ int main(int argc, char *argv[]) {
 
 	/*----------------------------------*/
 
-	vector<vector<Node::Pixel>> segments = mysmst.segments;  ///// segments[i][j].x  ,  segments[i][j].y
+	vector<vector<Node::Pixel>> segments = mysmst.segments;  ///// segments[segment_num][pixel_num].x  ,  segments[segment_num][pixel_num].y
 
 	/*----------------------------------*/
 
